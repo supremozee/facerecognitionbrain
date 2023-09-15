@@ -116,7 +116,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('https://infinite-thicket-64230.herokuapp.com/imageUrl', {
+    fetch('https://ubiquitous-rugelach-506407.netlify.app//imageUrl', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -127,7 +127,7 @@ class App extends Component {
     })
       .then(response => {
         if (response) {
-          fetch('https://infinite-thicket-64230.herokuapp.com/image', {
+          fetch('https://ubiquitous-rugelach-506407.netlify.app//image', {
             method: 'put',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
