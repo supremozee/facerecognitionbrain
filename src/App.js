@@ -51,34 +51,34 @@ class App extends Component {
   }
 
 
-  loadUser = (data) => {
-    this.setState({
-      user: {
-        id: data.id,
-        name: data.name,
-        email: data.email,
-        entries: data.entries,
-        joined: data.joined
-      }
-    })
-  }
+  // loadUser = (data) => {
+  //   this.setState({
+  //     user: {
+  //       id: data.id,
+  //       name: data.name,
+  //       email: data.email,
+  //       entries: data.entries,
+  //       joined: data.joined
+  //     }
+  //   })
+  // }
 
-  calculateFaceLocation = (data) => {
-    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('inputimage');
-    const width = Number(image.width);
-    const height = Number(image.height);
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
-    }
-  }
+  // calculateFaceLocation = (data) => {
+  //   const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+  //   const image = document.getElementById('inputimage');
+  //   const width = Number(image.width);
+  //   const height = Number(image.height);
+  //   return {
+  //     leftCol: clarifaiFace.left_col * width,
+  //     topRow: clarifaiFace.top_row * height,
+  //     rightCol: width - (clarifaiFace.right_col * width),
+  //     bottomRow: height - (clarifaiFace.bottom_row * height)
+  //   }
+  // }
 
-  displayFaceBox = (box) => {
-    this.setState({ box: box });
-  }
+  // displayFaceBox = (box) => {
+  //   this.setState({ box: box });
+  // }
 
   onInputChange = (event) => {
     this.setState({input: event.target.value})
@@ -116,33 +116,33 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch('https://ubiquitous-rugelach-506407.netlify.app//imageUrl', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        input: this.state.input
-      })
-    }).then(data => {
-      return data.json()
-    })
-      .then(response => {
-        if (response) {
-          fetch('https://ubiquitous-rugelach-506407.netlify.app//image', {
-            method: 'put',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              id: this.state.user.id
-            })
-          })
-            .then(response => response.json())
-            .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count }))
-            })
+    // fetch('https://ubiquitous-rugelach-506407.netlify.app//imageUrl', {
+    //   method: 'post',
+    //   headers: {'Content-Type': 'application/json'},
+    //   body: JSON.stringify({
+    //     input: this.state.input
+    //   })
+    // }).then(data => {
+    //   return data.json()
+    // })
+    //   .then(response => {
+    //     if (response) {
+    //       fetch('https://ubiquitous-rugelach-506407.netlify.app//image', {
+    //         method: 'put',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //           id: this.state.user.id
+    //         })
+    //       })
+    //         .then(response => response.json())
+    //         .then(count => {
+    //           this.setState(Object.assign(this.state.user, { entries: count }))
+    //         })
 
-        }
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      })
-      .catch(err => console.log(err));
+    //     }
+    //     this.displayFaceBox(this.calculateFaceLocation(response))
+    //   })
+    //   .catch(err => console.log(err));
   }
 
   onRouteChange = (route) => {
@@ -178,8 +178,8 @@ class App extends Component {
           </div>
           : (
             route === 'signin'
-              ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              ? <SignIn  onRouteChange={this.onRouteChange} />
+              : <Register  onRouteChange={this.onRouteChange} />
           )
         }
       </div>
